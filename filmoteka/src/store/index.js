@@ -6,12 +6,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    films: {}
+    movie: {}
    
   },
   mutations: {
-    setFilms(state,{films}){
-      state.films=films;
+    setFilms(state,{movie}){
+      state.movie=movie;
     }
     
   },
