@@ -10,7 +10,9 @@ export default new Vuex.Store({
    
   },
   mutations: {
-    setFilms(state,)
+    setFilms(state,{films}){
+      state.films=films;
+    }
     
   },
   actions: {
