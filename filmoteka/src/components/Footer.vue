@@ -1,5 +1,5 @@
 <template>
-<div class="container footer">
+<div class=" Footer container footer">
     <div class="footer__container">
       <p class="footer__text">© 2020 | All Rights Reserved |</p>
       <p class="footer__text">
@@ -16,3 +16,17 @@
     </div>
   </div>
 </template>
+<script>
+export default{
+  name: 'Footer',
+  components: {},
+  props: {},
+  data() {
+    return{}
+  },
+  computed:{},
+  methods: {}
+}
+
+
+</script>

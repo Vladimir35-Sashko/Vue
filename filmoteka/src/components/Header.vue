@@ -1,6 +1,6 @@
 <template>
   
-  <div class="header__container container home-container">
+  <div class=" Header header__container container home-container">
     <div class="header__nav-wrapper">
       <a class="logo__link" href="#!"
         ><img
@@ -43,12 +43,18 @@
 </template>
 
 <script>
-// @ is an alias to /src
 
 export default {
+  name: 'Header',
+  props:{},
+  data() {
+    return {}
+  },
+  computed:{},
+  methods:{}
   
   
 }
 </script>
 <style scoped>
-<style>
+</style>
