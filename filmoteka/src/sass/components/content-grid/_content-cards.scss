@@ -1,6 +1,6 @@
 .content__cards {
   display: grid;
-  max-width: 100%;
+  //max-width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(274px, 1fr));
   grid-auto-rows: max-content;
   grid-gap: 30px;

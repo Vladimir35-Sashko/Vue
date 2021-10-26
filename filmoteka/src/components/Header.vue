@@ -57,4 +57,7 @@ export default {
 }
 </script>
 <style scoped>
+.Header{
+  background-color: #000;
+}
 </style>

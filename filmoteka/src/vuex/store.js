@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
+// axios.defaults.baseURL = "https://api.themoviedb.org/3";
 
 
 Vue.use(Vuex);
@@ -13,7 +13,7 @@ let store = new Vuex.Store({
     },
     mutations: {
         SET_FILMS_TO_STATE: (state, films) => {
-            state.films = films;
+            state.films = films.results;
         }
     },
     actions: {
@@ -34,7 +34,7 @@ let store = new Vuex.Store({
     },
     getters: {
         FILMS(state) {
-            return state.films || {};
+            return state.films;
         }
     }
 

@@ -1,27 +1,29 @@
 <template>
-  <div class="Content">
+  <div class="Content container content-wraper content__cards content-section">
 
-  <ContentItem  v-for="film in FILMS" :key="film.id" :film-data="film"
+          <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film"
   />
       </div>
 </template>
 
 <script>
 // @ is an alias to /src
+
 import ContentItem from './ContentItem.vue'
 import {mapActions,mapGetters} from 'vuex'
 export default {
   name:'Content',
   components:{
-    ContentItem
+    ContentItem,
+
   },
   props:{},
   data() {
     return{
       films: []
-
     }
   },
+
   computed: {
     ...mapGetters([
         'FILMS'
