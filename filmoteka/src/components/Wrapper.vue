@@ -1,24 +1,21 @@
 <template>
 <div class ="Wrapper">
-  <Header/>
-  <Buttons></Buttons>
   <Content/>
-  <Footer/>
+  <Library/>
+
 </div>
 </template>
 
 <script>
-import Buttons from "./Buttons";
-import Header from "./Header.vue"
-import Footer from "./Footer.vue"
+
 import Content from "./Content.vue"
+import Library from "./Library";
 export default {
   name: "Wrapper",
   components: {
+    Library,
     Content,
-    Header,
-    Footer,
-    Buttons
+
   }
 }
 </script>
