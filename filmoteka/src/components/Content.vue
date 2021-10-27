@@ -1,5 +1,5 @@
 <template>
-  <div class="Content container content-wraper content__cards content-section">
+  <div class="Content container content-wraper  content-section">
     <Header/>
     <Buttons></Buttons>
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film"
@@ -52,3 +52,6 @@ export default {
 
 }
 </script>
+<style scoped>
+
+</style>

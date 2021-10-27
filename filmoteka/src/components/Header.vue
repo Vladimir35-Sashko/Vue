@@ -2,22 +2,26 @@
   
   <div class=" Header header__container container home-container">
     <div class="header__nav-wrapper">
-      <a class="logo__link" href="#!"
+      <a class="logo__link" href=""
         ><img
           class="logo__img"
           width="24"
           height="24"
           src="../images/header/logo.svg"
           data-index="home" /></a
-      ><a class="title-link" href="#!" data-index="home">Filmoteka </a>
+      ><a class="title-link" href="" data-index="home">Filmoteka </a>
 
       <ul class="header__nav list">
         <li class="header__nav-item">
-          <a class="header__nav-link header__nav-link--active" data-index="home" href="#!">HOME</a>
+
+          <a class="header__nav-link header__nav-link--active"  href="">HOME</a>
+
         </li>
 
         <li class="header__nav-item">
-          <a class="header__nav-link" data-index="liba" data-name="Watched" href="#!">MY LIBRARY</a>
+          <router-link to="Library">
+          <a class="header__nav-link" data-index="liba" data-name="Watched" href="">MY LIBRARY</a>
+          </router-link>
         </li>
       </ul>
     </div>

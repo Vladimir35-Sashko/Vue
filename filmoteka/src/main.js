@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import router from './router'
+import router from './router/router'
 import store from './vuex/store'
 import './sass/main.scss'
 
@@ -8,8 +8,7 @@ import './sass/main.scss'
 Vue.config.productionTip = false
 
 new Vue({
-  // router,
-
-  render: h => h(App),
-  store
+    render: h => h(App),
+  store,
+  router
 }).$mount('#app')

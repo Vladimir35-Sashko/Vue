@@ -1,17 +1,19 @@
 <template>
-  <div class="header__container container lib-container LibraryHeader" style="display: none">
+  <div class="header__container container lib-container LibraryHeader" >
     <div class="header__nav-wrapper">
-      <a class="logo__link" href="#!"
+      <a class="logo__link" href=""
       ><img
           class="logo__img"
           width="24"
           height="24"
-          src="/images/header/logo.svg"
+          src="../images/header/logo.svg"
           data-index="home" /></a
-      ><a class="title-link" href="#!" data-index="home">Filmoteka </a>
+      ><a class="title-link" href="" data-index="home">Filmoteka </a>
       <ul class="header__nav list">
         <li class="header__nav-item">
-          <a class="header__nav-link" data-index="home" href="#!">HOME</a>
+          <router-link :to="{name: 'Content'}">
+          <a class="header__nav-link"  href="">HOME</a>
+          </router-link>
         </li>
 
         <li class="header__nav-item">
@@ -19,7 +21,7 @@
               class="header__nav-link header__nav-link--active"
               data-index="liba"
               data-name="Watched"
-              href="#!"
+              href=""
           >MY LIBRARY</a
           >
         </li>

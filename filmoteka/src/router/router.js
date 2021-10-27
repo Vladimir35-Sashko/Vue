@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Wrapper from "../components/Wrapper";
 import Library from "../components/Library";
+import Content from "../components/Content";
 
 
 Vue.use(Router);
@@ -11,13 +11,15 @@ let router = new Router({
     routes: [
         {
       path: '/',
-      name: 'Wrapper',
-      component: Wrapper
+      name: 'Content',
+      component: Content,
+
     },
       {
         path: '/library',
         name: 'library',
-        component: Library
+        component: Library,
+          props: true
       }]
 })
 
