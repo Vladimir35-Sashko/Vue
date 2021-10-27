@@ -32,6 +32,8 @@
         name="query"
         placeholder="Поиск Фильмов"
         autocomplete="off"
+        v-model="searchvalue"
+        @keypress="search(searchvalue)"
       />
       <p class="header__input-icon"></p>
     </div>
@@ -47,16 +49,33 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from 'vuex'
 
 export default {
   name: 'Header',
   props:{},
   data() {
-    return {}
+    return {
+      searchvalue: ''
+    }
   },
-  computed:{},
-  methods:{}
-  
+  computed: {
+    ...mapGetters([
+      'SEARCH_VALUE'
+        ])
+
+  },
+    methods:{
+    ...mapActions([
+      'GET_SEARCH_VALUE_TO_VUEX'
+
+    ]),
+    search(value){
+      this.GET_SEARCH_VALUE_TO_VUEX(value);
+      this.$router.push('/')
+
+    }
+  }
   
 }
 </script>

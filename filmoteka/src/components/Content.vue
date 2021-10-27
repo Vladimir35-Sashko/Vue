@@ -1,6 +1,6 @@
 <template>
   <div class="Content container content-wraper  content-section">
-    <Header/>
+
     <Buttons></Buttons>
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film"
   />
@@ -11,7 +11,7 @@
 <script>
 // @ is an alias to /src
 import Buttons from "./Buttons"
-import Header from "./Header.vue"
+
 import Footer from "./Footer.vue"
 import ContentItem from './ContentItem.vue'
 import {mapActions,mapGetters} from 'vuex'
@@ -19,7 +19,7 @@ export default {
   name:'Content',
   components:{
     ContentItem,
-    Header,
+
     Footer,
     Buttons
 
@@ -27,25 +27,39 @@ export default {
   props:{},
   data() {
     return{
-      films: []
+      films: [],
+      searchvalue: ''
     }
   },
 
   computed: {
     ...mapGetters([
-        'FILMS'
+        'FILMS',
+        'SEARCH_VALUE'
     ])
   },
   methods: {
     ...mapActions([
         'GET_FILMS_FROM_API'
-    ])
+    ]),
+    filterFilmsBySearchValue(){
+      return this.FILMS.filter(film => {
+        return film.title.toLowerCase().includes(this.SEARCH_VALUE)
+      })
+
+    }
+  },
+  watch:{
+    SEARCH_VALUE(){
+      this.filterFilmsBySearchValue(this.SEARCH_VALUE);
+    }
+
   },
   mounted() {
     this.GET_FILMS_FROM_API()
     .then((response)=>{
       if (response.data) {
-        console.log('Data a live')
+        this.filterFilmsBySearchValue(this.SEARCH_VALUE)
       }
     })
   }

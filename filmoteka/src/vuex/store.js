@@ -9,9 +9,13 @@ Vue.use(Vuex);
 
 let store = new Vuex.Store({
     state: {
+        searchValue: '',
         films: []
     },
     mutations: {
+        SET_SEARCH_VALUE_TO_VUEX: (state,value) => {
+            state.searchValue = value;
+        },
         SET_FILMS_TO_STATE: (state, films) => {
             state.films = films.results;
         }
@@ -30,9 +34,15 @@ let store = new Vuex.Store({
                     console.log(error)
                     return error;
                 })
+        },
+        GET_SEARCH_VALUE_TO_VUEX ({commit},value) {
+            commit('SET_SEARCH_VALUE_TO_VUEX',value)
         }
     },
     getters: {
+        SEARCH_VALUE(state) {
+            return state.searchValue;
+        },
         FILMS(state) {
             return state.films;
         }
