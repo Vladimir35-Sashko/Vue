@@ -13,6 +13,7 @@ let router = new Router({
       path: '/',
       name: 'Content',
       component: Content,
+            props: true
 
     },
       {

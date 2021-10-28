@@ -32,8 +32,9 @@
         name="query"
         placeholder="Поиск Фильмов"
         autocomplete="off"
-        v-model="searchvalue"
-        @keypress="search(searchvalue)"
+        v-model="searchValue"
+        @keyup="search(searchValue)"
+
       />
       <p class="header__input-icon"></p>
     </div>
@@ -49,31 +50,30 @@
 </template>
 
 <script>
-import {mapActions,mapGetters} from 'vuex'
+
+import {mapGetters,mapActions} from "vuex";
+// import axios from "axios";
 
 export default {
   name: 'Header',
   props:{},
   data() {
     return {
-      searchvalue: ''
+      searchValue:''
     }
   },
   computed: {
     ...mapGetters([
-      'SEARCH_VALUE'
-        ])
-
+        'SEARCH_VALUE'
+    ])
   },
     methods:{
     ...mapActions([
-      'GET_SEARCH_VALUE_TO_VUEX'
-
+        'GET_SEARCH_VALUE_TO_VUEX'
     ]),
     search(value){
       this.GET_SEARCH_VALUE_TO_VUEX(value);
-      this.$router.push('/')
-
+      this.$router.push('/').catch(() => {})
     }
   }
   
