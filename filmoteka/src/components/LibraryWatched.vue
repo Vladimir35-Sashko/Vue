@@ -1,23 +1,16 @@
 <template>
-<div class="popup">
-  <slot></slot>
+<div class="libraryWatched">
+
 </div>
 </template>
 
 <script>
 export default {
-  name: "Popup",
-  props:{
-
-  },
+  name: "LibraryWatched",
   data(){
     return {}
-  },
-  methods:{
-    }
-
+  }
 }
-
 </script>
 
 <style scoped>

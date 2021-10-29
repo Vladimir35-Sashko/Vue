@@ -11,6 +11,7 @@ Vue.use(Vuex);
 let store = new Vuex.Store({
     state: {
         films: [],
+        library:[],
         searchValue:""
     },
     mutations: {
@@ -48,6 +49,9 @@ let store = new Vuex.Store({
         },
         SEARCH_VALUE(state) {
             return state.searchValue;
+        },
+        LIBRARY(state) {
+            return state.library;
         }
     }
 

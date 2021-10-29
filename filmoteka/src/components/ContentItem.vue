@@ -5,7 +5,7 @@
 
   <Popup
       v-if="isInfoPopupVisible"
-      @closePopup="closeInfoPopup"
+            @closePopup="closeInfoPopup"
 
   >
     <div class='lightbox__overlay' ref="popup_wrapper"></div>
@@ -57,7 +57,8 @@
               type='button'
               data-action='btn-to-wached'
               value='Watched'
-          >add to Watched</button>
+              @click="addToWatched"
+          >{{ buttonTitle }}</button>
           <button
               class='content__btn js-modal-queue'
               type='button'
@@ -110,7 +111,10 @@ export default {
           return {}
         }
 
-
+    },
+    buttonTitle:{
+      type:String,
+      default: 'add to watched'
     }
   },
     data() {
@@ -125,6 +129,9 @@ export default {
     },
     closeInfoPopup(){
       this.isInfoPopupVisible = false;
+    },
+    addToWatched(){
+      this.$emit('addToWatched',this.filmData);
     }
 
   },

@@ -1,6 +1,10 @@
 <template>
 <div class="Library">
 <LibraryHeader/>
+  <LibraryWatched
+  @addToWatched="addToWatched"
+  ></LibraryWatched>
+  <LibraryQueve></LibraryQueve>
   <Footer/>
 </div>
 
@@ -8,12 +12,21 @@
 
 <script>
 import LibraryHeader from "./LibraryHeader"
-import Footer from "./Footer";
+import Footer from "./Footer"
+import LibraryQueve from "./LibraryQueve";
+import LibraryWatched from "./LibraryWatched";
 export default {
   name: "Library",
   components: {
     LibraryHeader,
-    Footer
+    Footer,
+    LibraryQueve,
+    LibraryWatched
+  },
+  methods:{
+    addToWatched(data) {
+      console.log(data)
+    }
   }
 }
 </script>

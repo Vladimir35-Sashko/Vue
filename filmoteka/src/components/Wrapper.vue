@@ -4,19 +4,13 @@
   <keep-alive>
   <router-view></router-view>
   </keep-alive>
-<!--  <Content/>-->
-<!--  <Library/>-->
-
 </div>
 </template>
 
+
+
 <script>
-
-
-// import Content from "./Content.vue"
-// import Library from "./Library";
-
-// import axios from "axios";
+import {mapGetters} from "vuex";
 
 export default {
   name: "Wrapper",
@@ -26,6 +20,12 @@ export default {
   props:{},
   data(){
     return {}
+  },
+  computed:{
+    ...mapGetters([
+        'LIBRARY'
+    ])
+
   },
   methods:{
 
