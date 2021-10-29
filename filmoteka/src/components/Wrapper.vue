@@ -1,7 +1,6 @@
 <template>
 <div class ="Wrapper container content-wraper container  content-section">
-  <Header/>
-  <Buttons></Buttons>
+
   <keep-alive>
   <router-view></router-view>
   </keep-alive>
@@ -12,21 +11,24 @@
 </template>
 
 <script>
-import Buttons from "./Buttons"
+
 
 // import Content from "./Content.vue"
 // import Library from "./Library";
-import Header from "./Header.vue"
+
+// import axios from "axios";
 
 export default {
   name: "Wrapper",
   components: {
-    Header,
-    Buttons
+
   },
   props:{},
   data(){
     return {}
+  },
+  methods:{
+
   }
 
 }

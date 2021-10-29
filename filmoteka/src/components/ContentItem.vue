@@ -2,8 +2,77 @@
 
 <div class="ContentItem">
 
-   <li class='content__card'>
-    <a href='#!' :data-id='filmData.id' class='content__link'>
+
+  <Popup
+      v-if="isInfoPopupVisible"
+      @closePopup="closeInfoPopup"
+
+  >
+    <div class='lightbox__overlay' ref="popup_wrapper"></div>
+    <div class='lightbox__content'>
+      <button type='button' class='lightbox__button' data-action='close-lightbox'
+      @click="closeInfoPopup">
+      </button>
+      <img
+          class='lightbox__image'
+          :src='source'
+          :alt='posterAlt'
+      />
+      <div class='lightbox__information'>
+        <h2 class='lightbox__title'> {{filmData.title}}</h2>
+        <ul class='lightbox__list list'>
+          <li class='lightbox__list__item'>
+            <p class='item__list-title'> Vote / Votes</p>
+            <p class=''>
+              <span class='content__rating'> {{filmData.vote_average}}</span>
+
+              /
+              <span class='content__vote'>{{filmData.vote_count}}</span>
+            </p>
+          </li>
+          <li class='lightbox__list__item'>
+            <p class='item__list-title'>Popularity</p>
+            <p class='item-info-popul'>
+              {{filmData.popularity}}</p>
+          </li>
+          <li class='lightbox__list__item'>
+            <p class='item__list-title'>Original Title</p>
+            <span class='item-info-orig'>
+            {{filmData.original_title}}
+          </span>
+          </li>
+          <li class='lightbox__list__item'>
+            <p class='item__list-title'>Genre</p>
+            <span class='item-info-gen'>
+{{filmData.genre_ids}}
+          </span>
+          </li>
+        </ul>
+        <h3 class='lightbox__about'>About</h3>
+        <p class='lightbox__text'>{{filmData.overview}}
+        </p>
+        <div class='buttons-content'>
+          <button
+              class='content__btn js-modal-watched'
+              type='button'
+              data-action='btn-to-wached'
+              value='Watched'
+          >add to Watched</button>
+          <button
+              class='content__btn js-modal-queue'
+              type='button'
+              data-action='btn-to-queue'
+              value='Queue'
+          >add to queue</button>
+        </div>
+      </div>
+    </div>
+  </Popup>
+
+
+
+   <li class='content__card content__card__show__info' @click="showPopupInfo">
+    <a href='#' :data-id='filmData.id' class='content__link'>
       <div class='poster__wraper'>
         <img
             :src='source'
@@ -20,15 +89,20 @@
       </div>
     </a>
   </li>
+
   </div>
 
 </template>
 
 <script>
 // import genreList from "../vuex/genreList";
+import Popup from "../popup/Popup";
 
 export default {
     name:'ContentItem',
+  components:{
+    Popup
+  },
   props:{
       filmData:{
         type: Object,
@@ -41,8 +115,19 @@ export default {
   },
     data() {
         return {
+          isInfoPopupVisible: false
         }
     },
+  methods:{
+    showPopupInfo(){
+      this.isInfoPopupVisible = true;
+
+    },
+    closeInfoPopup(){
+      this.isInfoPopupVisible = false;
+    }
+
+  },
   computed:{
       posterAlt() {
         return `poster for ${this.filmData.title}`
@@ -59,7 +144,15 @@ export default {
     //       });
     // }
 
-    }
+    },
+  mounted() {
+    let vm = this;
+    document.addEventListener('click', function (item){
+      if (item.target === vm.$refs['popup_wrapper']){
+        vm.closeInfoPopup()
+      }
+    })
+  }
 
   }
 
@@ -71,5 +164,6 @@ export default {
   list-style: none;
   margin: 0;
   padding: 0;
+
 }
 </style>
