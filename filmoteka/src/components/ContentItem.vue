@@ -64,6 +64,7 @@
               type='button'
               data-action='btn-to-queue'
               value='Queue'
+              @click="addToQueve"
           >add to queue</button>
         </div>
       </div>
@@ -132,6 +133,9 @@ export default {
     },
     addToWatched(){
       this.$emit('addToWatched',this.filmData);
+    },
+    addToQueve(){
+      this.$emit('addToQueve',this.filmData);
     }
 
   },
@@ -142,14 +146,9 @@ export default {
       source(){
         return `https://image.tmdb.org/t/p/w300${this.filmData.poster_path}`
       },
-    // genresText(){
-    //       let newGenres = [];
-    //   this.filmData.genre_ids.map((id) => {
-    //         const found = genreList.find((item) => item.id === id);
-    //         newGenres.push(found.name);
-    //         return item;
-    //       });
-    // }
+    genresText(){
+          return `https://api.themoviedb.org/3/genre/movie/list?api_key=699fe261bad37d16f5bc7fa8547e0738${this.filmData.genre_ids}`
+    }
 
     },
   mounted() {

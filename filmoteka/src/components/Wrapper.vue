@@ -2,7 +2,8 @@
 <div class ="Wrapper container content-wraper container  content-section">
 
   <keep-alive>
-  <router-view></router-view>
+  <router-view
+  :library_data="LIBRARY"></router-view>
   </keep-alive>
 </div>
 </template>

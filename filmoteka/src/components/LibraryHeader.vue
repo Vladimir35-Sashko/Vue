@@ -47,5 +47,8 @@ export default {
 </script>
 
 <style scoped>
+.LibraryHeader{
+  margin-bottom: 60px;
+}
 
 </style>

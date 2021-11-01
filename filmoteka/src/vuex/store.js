@@ -12,7 +12,7 @@ let store = new Vuex.Store({
     state: {
         films: [],
         library:[],
-        searchValue:""
+               searchValue:""
     },
     mutations: {
         SET_FILMS_TO_STATE: (state, films) => {
@@ -20,6 +20,29 @@ let store = new Vuex.Store({
         },
         SET_SEARCH_VALUE_TO_VUEX: (state,value) => {
             state.searchValue = value;
+        },
+        SET_LIBRARY:(state,film)=> {
+            if (state.library.length) {
+                let isFilmExists = false;
+                state.library.map(function (item){
+                    if (item.id === film.id){
+                        isFilmExists=true;
+                        alert('This film was allready added to watched')
+                    }
+                })
+                if (!isFilmExists) {
+                    state.library.push(film)
+                }
+            } else {
+                state.library.push(film)
+            }
+
+        },
+        REMOVE_FROM_WATCHED:(state,index) =>{
+            state.library.splice(index,1)
+        },
+        REMOVE_FROM_QUEVE:(state,index)=>{
+            state.library.splice(index,1)
         }
     },
     actions: {
@@ -39,6 +62,15 @@ let store = new Vuex.Store({
         },
         GET_SEARCH_VALUE_TO_VUEX({commit},value) {
             commit ('SET_SEARCH_VALUE_TO_VUEX',value)
+        },
+        ADD_TO_LIBRARY({commit},film){
+            commit('SET_LIBRARY',film);
+        },
+        DELETE_FROM_WATCHED({commit}, index) {
+            commit('REMOVE_FROM_WATCHED', index)
+        },
+        DELETE_FROM_QUEVE({commit},index) {
+            commit('REMOVE_FROM_QUEVE',index)
         }
 
 },

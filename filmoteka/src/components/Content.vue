@@ -3,7 +3,8 @@
   <div class="Content container content-wraper content__cards content-section">
     <Header/>
     <Buttons @click="allTimePopularFilms();thisWeekFilms()" ></Buttons>
-          <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film"
+          <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
+                        @addToQueve="addToQueve"
   />
     <Footer/>
       </div>
@@ -49,7 +50,8 @@ export default {
   },
   methods: {
     ...mapActions([
-        'GET_FILMS_FROM_API'
+        'GET_FILMS_FROM_API',
+        'ADD_TO_LIBRARY'
     ]),
     searchFilmsByValue(value){
       if (value){
@@ -60,7 +62,13 @@ export default {
             })
             .catch(error=> console.log(error));
       }
-          }
+          },
+    addToWatched(data){
+      this.ADD_TO_LIBRARY(data)
+    },
+    addToQueve(data){
+      this.ADD_TO_LIBRARY(data)
+    }
   },
 
   mounted() {
