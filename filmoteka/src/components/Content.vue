@@ -6,7 +6,9 @@
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
                         @addToQueve="addToQueve"
   />
+    <LoadMoreButton></LoadMoreButton>
     <Footer/>
+    <GoToTop></GoToTop>
       </div>
 </template>
 
@@ -14,17 +16,22 @@
 // @ is an alias to /src
 
 import axios from "axios";
+import LoadMoreButton from "./LoadMoreButton";
 import Buttons from "./Buttons"
 import Header from "./Header.vue"
 import Footer from "./Footer.vue"
+import GoToTop from "./GoToTop";
 import ContentItem from './ContentItem.vue'
 import {mapActions,mapGetters} from 'vuex'
 export default {
   name:'Content',
   components:{
     ContentItem,
-    Footer,Header,
-    Buttons
+    Footer,
+    Header,
+    Buttons,
+    LoadMoreButton,
+    GoToTop
 
   },
   props:{},
@@ -51,7 +58,8 @@ export default {
   methods: {
     ...mapActions([
         'GET_FILMS_FROM_API',
-        'ADD_TO_LIBRARY'
+        'ADD_TO_LIBRARY_WATCHED',
+        'ADD_TO_LIBRARY_QUEVE'
     ]),
     searchFilmsByValue(value){
       if (value){
@@ -64,10 +72,10 @@ export default {
       }
           },
     addToWatched(data){
-      this.ADD_TO_LIBRARY(data)
+      this.ADD_TO_LIBRARY_WATCHED(data)
     },
     addToQueve(data){
-      this.ADD_TO_LIBRARY(data)
+      this.ADD_TO_LIBRARY_QUEVE(data)
     }
   },
 

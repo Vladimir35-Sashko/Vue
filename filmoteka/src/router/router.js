@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Library from "../components/Library";
 import Content from "../components/Content";
+import LibraryWatched from "../components/LibraryWatched";
+import LibraryQueve from "../components/LibraryQueve";
 
 
 Vue.use(Router);
@@ -21,7 +23,22 @@ let router = new Router({
         name: 'library',
         component: Library,
           props: true
-      }]
+      },
+        {
+            path: '/watched',
+            name: 'LibraryWatched',
+            component: LibraryWatched,
+            props: true
+
+        },
+        {
+            path: '/queve',
+            name: 'LibraryQueve',
+            component: LibraryQueve,
+            props: true
+
+        },
+    ]
 })
 
 export default router;

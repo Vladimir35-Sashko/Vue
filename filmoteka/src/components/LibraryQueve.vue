@@ -1,5 +1,5 @@
 <template>
-<div class="libraryQueve" :class="{active: isActive}">
+<div class="libraryQueve">
 
 
   <Popup

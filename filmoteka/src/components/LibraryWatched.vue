@@ -4,6 +4,7 @@
       v-if="isInfoPopupVisible"
       @closePopup="closeInfoPopup"
 
+
   >
     <div class='lightbox__overlay' ref="popup_wrapper"></div>
     <div class='lightbox__content'>
@@ -93,6 +94,7 @@
 
 <script>
 import Popup from "../popup/Popup";
+import {mapGetters} from "vuex";
 export default {
   name: "LibraryWatched",
   components: {
@@ -131,6 +133,12 @@ export default {
       }
     },
   computed: {
+    ...mapGetters([
+      'LIBRARY_WATCHED',
+      'LIBRARY_QUEVE'
+    ]),
+
+
     posterAlt() {
       return `poster for ${this.library_watched_data.title}`
     },
