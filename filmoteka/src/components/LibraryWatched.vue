@@ -102,9 +102,9 @@ export default {
   },
   props: {
     library_watched_data: {
-      type: Object,
+      type: Array,
       default() {
-        return {}
+        return []
       }
     },
     buttonTitle:{

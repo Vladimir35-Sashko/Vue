@@ -37,7 +37,7 @@
         Watched
       </button>
       </router-link>
-      <router-link :to="{name:'LibraryQueve'}">
+      <router-link :to="{name:'LibraryQueue'}">
       <button type="button" class="modal-button js-queue" data-name="Queue">Queue</button>
       </router-link>
     </div>

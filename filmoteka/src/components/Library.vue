@@ -1,10 +1,11 @@
 <template>
 <div class="Library">
+
+
+  <LibraryHeader/>
   <KeepAlive>
     <router-view></router-view>
   </KeepAlive>
-
-  <LibraryHeader/>
 
 
   <LibraryWatched

@@ -18,7 +18,14 @@ let store = new Vuex.Store({
     },
     mutations: {
         SET_FILMS_TO_STATE: (state, films) => {
-            state.films = films.results;
+            function compare(a, b) {
+                if (a.release_date > b.release_date)
+                    return -1;
+                if (a.release_date < b.release_date)
+                    return 1;
+                return 0;
+            }
+            state.films = films.results.sort(compare);
         },
         SET_SEARCH_VALUE_TO_VUEX: (state,value) => {
             state.searchValue = value;

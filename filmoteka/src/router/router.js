@@ -12,31 +12,28 @@ Vue.use(Router);
 let router = new Router({
     routes: [
         {
-      path: '/',
-      name: 'Content',
-      component: Content,
+            path: '/',
+            name: 'Content',
+            component: Content,
             props: true
-
-    },
-      {
-        path: '/library',
-        name: 'library',
-        component: Library,
-          props: true
-      },
+        },
+        {
+            path: '/library',
+            name: 'library',
+            component: Library,
+            props: true
+        },
         {
             path: '/watched',
             name: 'LibraryWatched',
             component: LibraryWatched,
             props: true
-
         },
         {
-            path: '/queve',
-            name: 'LibraryQueve',
+            path: '/queue',
+            name: 'LibraryQueue',
             component: LibraryQueve,
             props: true
-
         },
     ]
 })

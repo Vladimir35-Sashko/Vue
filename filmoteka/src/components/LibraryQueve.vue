@@ -105,9 +105,9 @@ export default {
 
   props: {
     library_queve_data: {
-      type: Object,
+      type: Array,
       default() {
-        return {}
+        return []
       }
     },
     buttonTitle:{

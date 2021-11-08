@@ -6,6 +6,7 @@
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
                         @addToQueve="addToQueve"
   />
+
     <LoadMoreButton></LoadMoreButton>
     <Footer/>
     <GoToTop></GoToTop>
@@ -38,8 +39,9 @@ export default {
   data() {
     return{
       films: [],
-      searchValue:''
-                      }
+      searchValue:'',
+
+    }
   },
 
   computed: {
@@ -47,12 +49,13 @@ export default {
         'FILMS',
       'SEARCH_VALUE'
 
-    ])
+    ]),
+
   },
   watch:{
     SEARCH_VALUE(){
       this.searchFilmsByValue(this.SEARCH_VALUE);
-    }
+    },
 
   },
   methods: {
@@ -76,7 +79,8 @@ export default {
     },
     addToQueve(data){
       this.ADD_TO_LIBRARY_QUEVE(data)
-    }
+    },
+
   },
 
   mounted() {

@@ -85,19 +85,18 @@
       <div class='card__description'>
         <p class='content__title'>{{filmData.title}}</p>
         <p class='content__info'><span class='content__genres'>{{filmData.genre_ids}}</span>
-          |
+
           <span class='content__year'>{{filmData.release_date.slice(0,4)}}</span>
           <span class='content__rating'>{{filmData.vote_average}}</span></p>
       </div>
     </a>
   </li>
-
-  </div>
+</div>
 
 </template>
 
 <script>
-// import genreList from "../vuex/genreList";
+// import genreList from "../vuex/genreList.json"
 import Popup from "../popup/Popup";
 
 export default {
@@ -116,7 +115,87 @@ export default {
     buttonTitle:{
       type:String,
       default: 'add to watched'
-    }
+    },
+    genreList:[
+      {
+        "id": 28,
+        "name": "Action"
+      },
+      {
+        "id": 12,
+        "name": "Adventure"
+      },
+      {
+        "id": 16,
+        "name": "Animation"
+      },
+      {
+        "id": 35,
+        "name": "Comedy"
+      },
+      {
+        "id": 80,
+        "name": "Crime"
+      },
+      {
+        "id": 99,
+        "name": "Documentary"
+      },
+      {
+        "id": 18,
+        "name": "Drama"
+      },
+      {
+        "id": 10751,
+        "name": "Family"
+      },
+      {
+        "id": 14,
+        "name": "Fantasy"
+      },
+      {
+        "id": 36,
+        "name": "History"
+      },
+      {
+        "id": 27,
+        "name": "Horror"
+      },
+      {
+        "id": 10402,
+        "name": "Music"
+      },
+      {
+        "id": 9648,
+        "name": "Mystery"
+      },
+      {
+        "id": 10749,
+        "name": "Romance"
+      },
+      {
+        "id": 878,
+        "name": "Science Fiction"
+      },
+      {
+        "id": 10770,
+        "name": "TV Movie"
+      },
+      {
+        "id": 53,
+        "name": "Thriller"
+      },
+      {
+        "id": 10752,
+        "name": "War"
+      },
+      {
+        "id": 37,
+        "name": "Western"
+      }
+    ]
+
+
   },
     data() {
         return {
@@ -147,10 +226,15 @@ export default {
         return `https://image.tmdb.org/t/p/w300${this.filmData.poster_path}`
       },
     genresText(){
-          return `https://api.themoviedb.org/3/genre/movie/list?api_key=699fe261bad37d16f5bc7fa8547e0738${this.filmData.genre_ids}`
+           let newArr = {};
+      const a=this.genreList.forEach(({id,name})=>{
+        newArr[id] = name;
+      });
+      console.log(a)
+      return newArr;
     }
 
-    },
+  },
   mounted() {
     let vm = this;
     document.addEventListener('click', function (item){
