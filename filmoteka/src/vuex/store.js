@@ -14,18 +14,13 @@ let store = new Vuex.Store({
         library:[],
         libraryWatched:[],
         libraryQueve:[],
-               searchValue:""
+        searchValue:"",
     },
     mutations: {
         SET_FILMS_TO_STATE: (state, films) => {
-            function compare(a, b) {
-                if (a.release_date > b.release_date)
-                    return -1;
-                if (a.release_date < b.release_date)
-                    return 1;
-                return 0;
-            }
-            state.films = films.results.sort(compare);
+            state.films = films.results;
+
+
         },
         SET_SEARCH_VALUE_TO_VUEX: (state,value) => {
             state.searchValue = value;
@@ -85,6 +80,7 @@ let store = new Vuex.Store({
                     console.log(error)
                     return error;
                 })
+
         },
         GET_SEARCH_VALUE_TO_VUEX({commit},value) {
             commit ('SET_SEARCH_VALUE_TO_VUEX',value)
@@ -101,8 +97,7 @@ let store = new Vuex.Store({
         DELETE_FROM_QUEVE({commit},index) {
             commit('REMOVE_FROM_QUEVE',index)
         }
-
-},
+        },
 
     getters: {
         FILMS(state) {

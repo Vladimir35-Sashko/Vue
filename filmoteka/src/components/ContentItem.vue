@@ -72,7 +72,7 @@
   </Popup>
 
 
-
+<ul>
    <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='filmData.id' class='content__link'>
       <div class='poster__wraper'>
@@ -91,6 +91,7 @@
       </div>
     </a>
   </li>
+</ul>
 </div>
 
 </template>
@@ -250,10 +251,10 @@ export default {
 </script>
 
 <style>
-.ContentItem{
+.ContentItem {
   list-style: none;
   margin: 0;
   padding: 0;
-
 }
+
 </style>

@@ -3,11 +3,10 @@
   <div class="Content container content-wraper content__cards content-section">
     <Header/>
     <Buttons @click="allTimePopularFilms();thisWeekFilms()" ></Buttons>
-          <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
+          <ContentItem  v-for="film in films" :key="film.id" :filmData="film" @addToWatched="addToWatched"
                         @addToQueve="addToQueve"
   />
 
-    <LoadMoreButton></LoadMoreButton>
     <Footer/>
     <GoToTop></GoToTop>
       </div>
@@ -17,7 +16,6 @@
 // @ is an alias to /src
 
 import axios from "axios";
-import LoadMoreButton from "./LoadMoreButton";
 import Buttons from "./Buttons"
 import Header from "./Header.vue"
 import Footer from "./Footer.vue"
@@ -31,7 +29,6 @@ export default {
     Footer,
     Header,
     Buttons,
-    LoadMoreButton,
     GoToTop
 
   },
@@ -40,6 +37,8 @@ export default {
     return{
       films: [],
       searchValue:'',
+      page: 1,
+      bottom: false
 
     }
   },
@@ -56,13 +55,39 @@ export default {
     SEARCH_VALUE(){
       this.searchFilmsByValue(this.SEARCH_VALUE);
     },
+    bottom (bottom) {
+      if (bottom) {
+        this.addFilm()
+      }
+    }
 
   },
   methods: {
+    bottomVisible () {
+      const scrollY = window.scrollY
+      const visible = document.documentElement.clientHeight
+      const pageHeight = document.documentElement.scrollHeight
+      const bottomOfPage = visible + scrollY >= pageHeight
+
+      return bottomOfPage || pageHeight < visible
+    },
+    addFilm () {
+     axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738&page=${this.page}`)
+          .then(response => {
+            let api = response.data.results
+            this.films.push(...api);
+            if (this.bottomVisible()) {
+              this.addFilm()
+            }
+          })
+     this.page++;
+
+  },
     ...mapActions([
         'GET_FILMS_FROM_API',
         'ADD_TO_LIBRARY_WATCHED',
-        'ADD_TO_LIBRARY_QUEVE'
+        'ADD_TO_LIBRARY_QUEVE',
+
     ]),
     searchFilmsByValue(value){
       if (value){
@@ -81,6 +106,13 @@ export default {
       this.ADD_TO_LIBRARY_QUEVE(data)
     },
 
+  },
+
+  created () {
+    window.addEventListener('scroll', () => {
+      this.bottom = this.bottomVisible()
+    })
+    this.addFilm()
   },
 
   mounted() {
