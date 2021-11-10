@@ -72,7 +72,7 @@
 
 
 
-
+  <ul class="content__cards">
   <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='library_queve_data.id' class='content__link'>
       <div class='poster__wraper'>
@@ -91,7 +91,7 @@
       </div>
     </a>
   </li>
-
+  </ul>
 </div>
 </template>
 

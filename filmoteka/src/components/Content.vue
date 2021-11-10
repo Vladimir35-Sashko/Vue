@@ -1,12 +1,16 @@
 <template>
 
-  <div class="Content container content-wraper content__cards content-section">
+  <div class="Content ">
+    <div class=" container header__container home-container">
     <Header/>
+    </div>
     <Buttons @click="allTimePopularFilms();thisWeekFilms()" ></Buttons>
-          <ContentItem  v-for="film in films" :key="film.id" :filmData="film" @addToWatched="addToWatched"
+
+    <div class="content__cards">
+          <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
                         @addToQueve="addToQueve"
   />
-
+    </div>
     <Footer/>
     <GoToTop></GoToTop>
       </div>
@@ -54,6 +58,7 @@ export default {
   watch:{
     SEARCH_VALUE(){
       this.searchFilmsByValue(this.SEARCH_VALUE);
+
     },
     bottom (bottom) {
       if (bottom) {
@@ -74,8 +79,7 @@ export default {
     addFilm () {
      axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738&page=${this.page}`)
           .then(response => {
-            let api = response.data.results
-            this.films.push(...api);
+            this.$store.commit('SET_FILMS_TO_STATE',response.data)
             if (this.bottomVisible()) {
               this.addFilm()
             }
@@ -98,6 +102,9 @@ export default {
             })
             .catch(error=> console.log(error));
       }
+      else if(value===''){
+        this.GET_FILMS_FROM_API()
+      }
           },
     addToWatched(data){
       this.ADD_TO_LIBRARY_WATCHED(data)
@@ -105,6 +112,22 @@ export default {
     addToQueve(data){
       this.ADD_TO_LIBRARY_QUEVE(data)
     },
+    allTimePopularFilms(){
+      return axios
+          .get('https://api.themoviedb.org/3/movie/popular?api_key=699fe261bad37d16f5bc7fa8547e0738')
+          .then((response)=>{
+            this.$store.commit('SET_FILMS_TO_STATE', response.data)
+          })
+          .catch(error=> console.log(error));
+    },
+    thisWeekFilms(){
+      return axios
+          .get('https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738')
+          .then((response)=>{
+            this.$store.commit('SET_FILMS_TO_STATE', response.data)
+          })
+          .catch(error=> console.log(error));
+    }
 
   },
 

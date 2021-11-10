@@ -1,6 +1,6 @@
 <template>
   
-  <div class=" Header header__container container home-container">
+  <div class=" Header  page-header header__container home-container">
     <div class="header__nav-wrapper">
       <a class="logo__link" href=""
         ><img

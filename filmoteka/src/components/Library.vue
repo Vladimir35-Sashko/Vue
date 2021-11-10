@@ -3,9 +3,9 @@
 
 
   <LibraryHeader/>
-  <KeepAlive>
-    <router-view></router-view>
-  </KeepAlive>
+<!--  <KeepAlive>-->
+<!--    <router-view></router-view>-->
+<!--  </KeepAlive>-->
 
 
   <LibraryWatched
@@ -61,7 +61,8 @@ export default {
   data(){
     return{
       libraryWatched:[],
-      libraryQueve:[]
+      libraryQueve:[],
+
     }
   },
   computed: {

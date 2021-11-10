@@ -72,7 +72,7 @@
   </Popup>
 
 
-<ul>
+<ul class="content__cards">
    <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='filmData.id' class='content__link'>
       <div class='poster__wraper'>
@@ -99,6 +99,7 @@
 <script>
 // import genreList from "../vuex/genreList.json"
 import Popup from "../popup/Popup";
+// import axios from "axios";
 
 export default {
     name:'ContentItem',
@@ -117,84 +118,6 @@ export default {
       type:String,
       default: 'add to watched'
     },
-    genreList:[
-      {
-        "id": 28,
-        "name": "Action"
-      },
-      {
-        "id": 12,
-        "name": "Adventure"
-      },
-      {
-        "id": 16,
-        "name": "Animation"
-      },
-      {
-        "id": 35,
-        "name": "Comedy"
-      },
-      {
-        "id": 80,
-        "name": "Crime"
-      },
-      {
-        "id": 99,
-        "name": "Documentary"
-      },
-      {
-        "id": 18,
-        "name": "Drama"
-      },
-      {
-        "id": 10751,
-        "name": "Family"
-      },
-      {
-        "id": 14,
-        "name": "Fantasy"
-      },
-      {
-        "id": 36,
-        "name": "History"
-      },
-      {
-        "id": 27,
-        "name": "Horror"
-      },
-      {
-        "id": 10402,
-        "name": "Music"
-      },
-      {
-        "id": 9648,
-        "name": "Mystery"
-      },
-      {
-        "id": 10749,
-        "name": "Romance"
-      },
-      {
-        "id": 878,
-        "name": "Science Fiction"
-      },
-      {
-        "id": 10770,
-        "name": "TV Movie"
-      },
-      {
-        "id": 53,
-        "name": "Thriller"
-      },
-      {
-        "id": 10752,
-        "name": "War"
-      },
-      {
-        "id": 37,
-        "name": "Western"
-      }
-    ]
 
 
   },
@@ -216,8 +139,22 @@ export default {
     },
     addToQueve(){
       this.$emit('addToQueve',this.filmData);
-    }
-
+    },
+    // genreValue(){
+    //   this.filmData.map((item)=>{
+    //     let newGenres = [];
+    //     item.genre_ids.map((id)=>{
+    //       const found = genreList.find((item)=>item.id ===id);
+    //       newGenres.push(found.name);
+    //     });
+    //     if (newGenres.length >= 3) {
+    //       const normalizedGenres = newGenres.slice(0, 2);
+    //       normalizedGenres.push("Other");}
+    //     else  {
+    //       item.genre_ids = newGenres.join(', ');}
+    //     return item;
+    //   })
+    // }
   },
   computed:{
       posterAlt() {
@@ -226,14 +163,6 @@ export default {
       source(){
         return `https://image.tmdb.org/t/p/w300${this.filmData.poster_path}`
       },
-    genresText(){
-           let newArr = {};
-      const a=this.genreList.forEach(({id,name})=>{
-        newArr[id] = name;
-      });
-      console.log(a)
-      return newArr;
-    }
 
   },
   mounted() {
