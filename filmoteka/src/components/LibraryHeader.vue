@@ -28,7 +28,7 @@
       </ul>
     </div>
     <div class="header__filter-button-wrapper">
-<!--      <router-link :to="{name:'LibraryWatched'}">-->
+      <router-link :to="{name:'LibraryWatched'}">
       <button
           type="button"
           data-name="Watched"
@@ -36,10 +36,10 @@
       >
         Watched
       </button>
-<!--      </router-link>-->
-<!--      <router-link :to="{name:'LibraryQueue'}">-->
+      </router-link>
+      <router-link :to="{name:'LibraryQueue'}">
       <button type="button" class="modal-button js-queue" data-name="Queue">Queue</button>
-<!--      </router-link>-->
+      </router-link>
     </div>
   </div>
 </template>
@@ -48,7 +48,6 @@
 // import {mapGetters} from "vuex";
 export default {
   name: "LibraryHeader",
-
 
 }
 </script>

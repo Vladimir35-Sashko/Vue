@@ -84,9 +84,9 @@
       </div>
       <div class='card__description'>
         <p class='content__title'>{{filmData.title}}</p>
-        <p class='content__info'><span class='content__genres'>{{filmData.genre_ids}}</span>
+        <p class='content__info'><span class='content__genres'>{{genreValue()}}</span>
 
-          <span class='content__year'>{{filmData.release_date.slice(0,4)}}</span>
+          <span class='content__year'>{{filmData.release_date}}</span>
           <span class='content__rating'>{{filmData.vote_average}}</span></p>
       </div>
     </a>
@@ -99,7 +99,7 @@
 <script>
 // import genreList from "../vuex/genreList.json"
 import Popup from "../popup/Popup";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
     name:'ContentItem',
@@ -140,21 +140,19 @@ export default {
     addToQueve(){
       this.$emit('addToQueve',this.filmData);
     },
-    // genreValue(){
-    //   this.filmData.map((item)=>{
-    //     let newGenres = [];
-    //     item.genre_ids.map((id)=>{
-    //       const found = genreList.find((item)=>item.id ===id);
-    //       newGenres.push(found.name);
-    //     });
-    //     if (newGenres.length >= 3) {
-    //       const normalizedGenres = newGenres.slice(0, 2);
-    //       normalizedGenres.push("Other");}
-    //     else  {
-    //       item.genre_ids = newGenres.join(', ');}
-    //     return item;
-    //   })
-    // }
+    genreValue(){
+      axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=699fe261bad37d16f5bc7fa8547e0738&language=en-US')
+      .then(response=>{
+        const genres = {};
+        response.data.genres.forEach(({id,name})=>{
+          genres[id] = name;
+          // console.log(genres)
+          return genres;
+        })
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
   },
   computed:{
       posterAlt() {

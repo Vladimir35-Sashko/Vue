@@ -1,9 +1,8 @@
 <template>
-<div class="libraryWatched">
+  <div class="libraryWatched">
   <Popup
       v-if="isInfoPopupVisible"
       @closePopup="closeInfoPopup"
-
 
   >
     <div class='lightbox__overlay' ref="popup_wrapper"></div>
@@ -69,6 +68,7 @@
     </div>
   </Popup>
 
+
 <ul class="content__cards" >
   <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='library_watched_data.id' class='content__link'>
@@ -83,7 +83,7 @@
         <p class='content__title'>{{library_watched_data.title}}</p>
         <p class='content__info'><span class='content__genres'>{{library_watched_data.genre_ids}}</span>
           |
-          <span class='content__year'>{{library_watched_data.release_date.slice(0,4)}}</span>
+          <span class='content__year'>{{library_watched_data.release_date}}</span>
           <span class='content__rating'>{{library_watched_data.vote_average}}</span></p>
       </div>
     </a>
@@ -94,7 +94,7 @@
 
 <script>
 import Popup from "../popup/Popup";
-import {mapGetters} from "vuex";
+// import {mapGetters} from "vuex";
 export default {
   name: "LibraryWatched",
   components: {
@@ -102,9 +102,9 @@ export default {
   },
   props: {
     library_watched_data: {
-      type: Array,
+      type: Object,
       default() {
-        return []
+        return {}
       }
     },
     buttonTitle:{
@@ -115,7 +115,7 @@ export default {
   data() {
     return {
       isInfoPopupVisible: false,
-      isActive:false
+
     }
   },
 
@@ -134,10 +134,10 @@ export default {
       }
     },
   computed: {
-    ...mapGetters([
-      'LIBRARY_WATCHED',
-      'LIBRARY_QUEVE'
-    ]),
+    // ...mapGetters([
+    //   'LIBRARY_WATCHED',
+    //   'LIBRARY_QUEVE'
+    // ]),
 
     posterAlt() {
       return `poster for ${this.library_watched_data.title}`

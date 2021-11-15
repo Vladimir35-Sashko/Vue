@@ -19,8 +19,9 @@ let store = new Vuex.Store({
     mutations: {
         SET_FILMS_TO_STATE: (state, films) => {
             state.films = films.results;
-
-
+        },
+        ADD_FILMS_TO_STATE:(state,payload)=>{
+            state.films.push(payload);
         },
         SET_SEARCH_VALUE_TO_VUEX: (state,value) => {
             state.searchValue = value;

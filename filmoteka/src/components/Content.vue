@@ -5,7 +5,6 @@
     <Header/>
     </div>
     <Buttons @click="allTimePopularFilms();thisWeekFilms()" ></Buttons>
-
     <div class="content__cards">
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
                         @addToQueve="addToQueve"
@@ -17,7 +16,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 
 import axios from "axios";
 import Buttons from "./Buttons"
@@ -43,7 +41,6 @@ export default {
       searchValue:'',
       page: 1,
       bottom: false
-
     }
   },
 
@@ -79,7 +76,8 @@ export default {
     addFilm () {
      axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738&page=${this.page}`)
           .then(response => {
-            this.$store.commit('SET_FILMS_TO_STATE',response.data)
+            const newFilm=response.data.results;
+            this.$store.commit('ADD_FILMS_TO_STATE',...newFilm)
             if (this.bottomVisible()) {
               this.addFilm()
             }
@@ -93,7 +91,7 @@ export default {
         'ADD_TO_LIBRARY_QUEVE',
 
     ]),
-    searchFilmsByValue(value){
+    "searchFilmsByValue"(value){
       if (value){
         return axios
             .get('https://api.themoviedb.org/3/search/movie?api_key=699fe261bad37d16f5bc7fa8547e0738&query='+this.SEARCH_VALUE)
@@ -143,6 +141,7 @@ export default {
     .then((response)=>{
       if (response.data) {
         this.searchFilmsByValue(this.SEARCH_VALUE)
+        this.addFilm()
       }
     })
   }

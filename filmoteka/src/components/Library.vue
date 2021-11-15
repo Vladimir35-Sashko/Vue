@@ -3,9 +3,9 @@
 
 
   <LibraryHeader/>
-<!--  <KeepAlive>-->
-<!--    <router-view></router-view>-->
-<!--  </KeepAlive>-->
+  <KeepAlive>
+    <router-view></router-view>
+  </KeepAlive>
 
 
   <LibraryWatched

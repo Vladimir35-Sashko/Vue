@@ -86,7 +86,7 @@
         <p class='content__title'>{{library_queve_data.title}}</p>
         <p class='content__info'><span class='content__genres'>{{library_queve_data.genre_ids}}</span>
           |
-          <span class='content__year'>{{library_queve_data.release_date.slice(0,4)}}</span>
+          <span class='content__year'>{{library_queve_data.release_date}}</span>
           <span class='content__rating'>{{library_queve_data.vote_average}}</span></p>
       </div>
     </a>
@@ -105,9 +105,9 @@ export default {
 
   props: {
     library_queve_data: {
-      type: Array,
+      type: Object,
       default() {
-        return []
+        return {}
       }
     },
     buttonTitle:{
