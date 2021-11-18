@@ -24,8 +24,6 @@
             <p class='item__list-title'> Vote / Votes</p>
             <p class=''>
               <span class='content__rating'> {{library_queve_data.vote_average}}</span>
-
-              /
               <span class='content__vote'>{{library_queve_data.vote_count}}</span>
             </p>
           </li>
@@ -70,9 +68,9 @@
     </div>
   </Popup>
 
-
-
-  <ul class="content__cards">
+  <ul class="content__cards"
+      v-if="library_queve_data.length"
+  >
   <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='library_queve_data.id' class='content__link'>
       <div class='poster__wraper'>
@@ -92,6 +90,7 @@
     </a>
   </li>
   </ul>
+  <h2 class="empty-list" v-else> Queue list is empty...</h2>
 </div>
 </template>
 

@@ -28,27 +28,34 @@
       </ul>
     </div>
     <div class="header__filter-button-wrapper">
-      <router-link :to="{name:'LibraryWatched'}">
       <button
           type="button"
           data-name="Watched"
           class="modal-button header__button--right modal-button--active js-watched"
+
       >
         Watched
       </button>
-      </router-link>
-      <router-link :to="{name:'LibraryQueue'}">
-      <button type="button" class="modal-button js-queue" data-name="Queue">Queue</button>
-      </router-link>
+
+      <button type="button"
+              class="modal-button js-queue"
+              data-name="Queue"
+
+      >
+        Queue
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-// import {mapGetters} from "vuex";
+
 export default {
   name: "LibraryHeader",
+  props:['swapComponent'],
+  methods: {
 
+  }
 }
 </script>
 

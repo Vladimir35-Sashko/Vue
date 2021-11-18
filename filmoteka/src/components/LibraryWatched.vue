@@ -22,8 +22,6 @@
             <p class='item__list-title'> Vote / Votes</p>
             <p class=''>
               <span class='content__rating'> {{library_watched_data.vote_average}}</span>
-
-              /
               <span class='content__vote'>{{library_watched_data.vote_count}}</span>
             </p>
           </li>
@@ -69,7 +67,9 @@
   </Popup>
 
 
-<ul class="content__cards" >
+<ul class="content__cards"
+    v-if="library_watched_data.length"
+    >
   <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='library_watched_data.id' class='content__link'>
       <div class='poster__wraper'>
@@ -89,6 +89,7 @@
     </a>
   </li>
 </ul>
+    <h2 class="empty-list" v-else> Watched list is empty...</h2>
 </div>
 </template>
 
@@ -114,7 +115,7 @@ export default {
   },
   data() {
     return {
-      isInfoPopupVisible: false,
+      isInfoPopupVisible: false
 
     }
   },
@@ -158,10 +159,6 @@ export default {
 </script>
 
 <style scoped>
-.libraryWatched{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+
 
 </style>

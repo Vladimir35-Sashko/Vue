@@ -5,7 +5,7 @@
   <router-view
   :library_watched_data="LIBRARY_WATCHED"
   :library_queve_data="LIBRARY_QUEVE"
-  ></router-view>
+    ></router-view>
   </keep-alive>
 </div>
 </template>
