@@ -64,7 +64,7 @@
               type='button'
               data-action='btn-to-queue'
               value='Queue'
-              @click="addToQueve"
+              @click="addToQueue"
           >add to queue</button>
         </div>
       </div>
@@ -137,8 +137,8 @@ export default {
     addToWatched(){
       this.$emit('addToWatched',this.filmData);
     },
-    addToQueve(){
-      this.$emit('addToQueve',this.filmData);
+    addToQueue(){
+      this.$emit('addToQueue',this.filmData);
     },
     genreValue(){
       axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=699fe261bad37d16f5bc7fa8547e0738&language=en-US')

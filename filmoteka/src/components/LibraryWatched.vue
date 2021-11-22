@@ -59,7 +59,7 @@
               type='button'
               data-action='btn-to-queue'
               value='Queue'
-              @click="addToQueve"
+              @click="addToQueue"
           >add to queue</button>
         </div>
       </div>
@@ -68,7 +68,7 @@
 
 
 <ul class="content__cards"
-    v-if="library_watched_data.length"
+    v-if="library_watched_data"
     >
   <li class='content__card content__card__show__info' @click="showPopupInfo">
     <a href='#' :data-id='library_watched_data.id' class='content__link'>
@@ -95,7 +95,7 @@
 
 <script>
 import Popup from "../popup/Popup";
-// import {mapGetters} from "vuex";
+import {mapGetters,mapActions} from "vuex";
 export default {
   name: "LibraryWatched",
   components: {
@@ -121,25 +121,32 @@ export default {
   },
 
     methods: {
+      ...mapActions([
+        'DELETE_FROM_WATCHED',
+        'DELETE_FROM_QUEUE',
+        'ADD_TO_LIBRARY_WATCHED',
+        'ADD_TO_LIBRARY_QUEUE'
+
+      ]),
       showPopupInfo() {
         this.isInfoPopupVisible = true;
       },
       closeInfoPopup() {
         this.isInfoPopupVisible = false;
       },
-      addToQueve(){
-        this.$emit('addToQueve',this.library_watched_data);
+      addToQueue(){
+        this.$emit('addToQueue',this.library_watched_data);
       },
       deleteFromWatched(){
         this.$emit('deleteFromWatched')
       }
     },
   computed: {
-    // ...mapGetters([
-    //   'LIBRARY_WATCHED',
-    //   'LIBRARY_QUEVE'
-    // ]),
+    ...mapGetters([
+      'LIBRARY_WATCHED',
+      'LIBRARY_QUEUE'
 
+    ]),
     posterAlt() {
       return `poster for ${this.library_watched_data.title}`
     },

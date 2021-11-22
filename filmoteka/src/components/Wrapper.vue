@@ -4,7 +4,7 @@
   <keep-alive>
   <router-view
   :library_watched_data="LIBRARY_WATCHED"
-  :library_queve_data="LIBRARY_QUEVE"
+  :library_queue_data="LIBRARY_QUEUE"
     ></router-view>
   </keep-alive>
 </div>
@@ -27,7 +27,7 @@ export default {
   computed:{
     ...mapGetters([
         'LIBRARY_WATCHED',
-        'LIBRARY_QUEVE'
+        'LIBRARY_QUEUE'
     ])
 
   },

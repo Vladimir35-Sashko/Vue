@@ -22,13 +22,13 @@ export default {
     ADD_TO_LIBRARY_WATCHED({commit},film){
         commit('SET_LIBRARY_WATCHED',film);
     },
-    ADD_TO_LIBRARY_QUEVE({commit},film){
-        commit('SET_LIBRARY_QUEVE',film);
+    ADD_TO_LIBRARY_QUEUE({commit},film){
+        commit('SET_LIBRARY_QUEUE',film);
     },
     DELETE_FROM_WATCHED({commit}, index) {
         commit('REMOVE_FROM_WATCHED', index)
     },
-    DELETE_FROM_QUEVE({commit},index) {
-        commit('REMOVE_FROM_QUEVE',index)
+    DELETE_FROM_QUEUE({commit},index) {
+        commit('REMOVE_FROM_QUEUE',index)
     }
 }

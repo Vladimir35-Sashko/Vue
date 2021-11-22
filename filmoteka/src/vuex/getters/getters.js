@@ -8,7 +8,7 @@ export default {
     LIBRARY_WATCHED(state) {
         return state.libraryWatched;
     },
-    LIBRARY_QUEVE(state) {
-        return state.libraryQueve;
+    LIBRARY_QUEUE(state) {
+        return state.libraryQueue;
     }
 }

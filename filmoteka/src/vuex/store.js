@@ -14,7 +14,7 @@ let store = new Vuex.Store({
         films: [],
         library:[],
         libraryWatched:JSON.parse(localStorage.getItem('libraryWatched') || '[]'),
-        libraryQueve:JSON.parse(localStorage.getItem('libraryQueve') || '[]'),
+        libraryQueue:JSON.parse(localStorage.getItem('libraryQueue') || '[]'),
         searchValue:"",
     },
     mutations,

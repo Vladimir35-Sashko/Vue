@@ -7,7 +7,7 @@
     <Buttons @click="allTimePopularFilms();thisWeekFilms()" ></Buttons>
     <div class="content__cards">
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
-                        @addToQueve="addToQueve"
+                        @addToQueue="addToQueue"
   />
     </div>
     <Footer/>
@@ -88,7 +88,7 @@ export default {
     ...mapActions([
         'GET_FILMS_FROM_API',
         'ADD_TO_LIBRARY_WATCHED',
-        'ADD_TO_LIBRARY_QUEVE',
+        'ADD_TO_LIBRARY_QUEUE',
 
     ]),
     "searchFilmsByValue"(value){
@@ -107,8 +107,8 @@ export default {
     addToWatched(data){
       this.ADD_TO_LIBRARY_WATCHED(data)
     },
-    addToQueve(data){
-      this.ADD_TO_LIBRARY_QUEVE(data)
+    addToQueue(data){
+      this.ADD_TO_LIBRARY_QUEUE(data)
     },
     allTimePopularFilms(){
       return axios

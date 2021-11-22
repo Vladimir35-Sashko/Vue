@@ -26,30 +26,30 @@ export default {
         localStorage.setItem('libraryWatched',JSON.stringify(state.libraryWatched))
 
     },
-    SET_LIBRARY_QUEVE:(state,film)=> {
-        if (state.libraryQueve.length) {
+    SET_LIBRARY_QUEUE:(state,film)=> {
+        if (state.libraryQueue.length) {
             let isFilmExists = false;
-            state.libraryQueve.map(function (item){
+            state.libraryQueue.map(function (item){
                 if (item.id === film.id){
                     isFilmExists=true;
                     alert('This film was already added to watched')
                 }
             })
             if (!isFilmExists) {
-                state.libraryQueve.push(film)
+                state.libraryQueue.push(film)
             }
         } else {
-            state.libraryQueve.push(film)
+            state.libraryQueue.push(film)
         }
-        localStorage.setItem('libraryQueve',JSON.stringify(state.libraryQueve))
+        localStorage.setItem('libraryQueue',JSON.stringify(state.libraryQueue))
 
     },
     REMOVE_FROM_WATCHED:(state,index) =>{
         state.libraryWatched.splice(index,1)
         localStorage.removeItem('libraryWatched')
     },
-    REMOVE_FROM_QUEVE:(state,index)=>{
-        state.libraryQueve.splice(index,1)
-        localStorage.removeItem('libraryQueve')
+    REMOVE_FROM_QUEUE:(state,index)=>{
+        state.libraryQueue.splice(index,1)
+        localStorage.removeItem('libraryQueue')
     }
 }

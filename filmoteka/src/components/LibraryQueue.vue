@@ -1,5 +1,5 @@
 <template>
-<div class="libraryQueve">
+<div class="libraryQueue">
 
 
   <Popup
@@ -18,35 +18,35 @@
           :alt='posterAlt'
       />
       <div class='lightbox__information'>
-        <h2 class='lightbox__title'> {{library_queve_data.title}}</h2>
+        <h2 class='lightbox__title'> {{library_queue_data.title}}</h2>
         <ul class='lightbox__list list'>
           <li class='lightbox__list__item'>
             <p class='item__list-title'> Vote / Votes</p>
             <p class=''>
-              <span class='content__rating'> {{library_queve_data.vote_average}}</span>
-              <span class='content__vote'>{{library_queve_data.vote_count}}</span>
+              <span class='content__rating'> {{library_queue_data.vote_average}}</span>
+              <span class='content__vote'>{{library_queue_data.vote_count}}</span>
             </p>
           </li>
           <li class='lightbox__list__item'>
             <p class='item__list-title'>Popularity</p>
             <p class='item-info-popul'>
-              {{library_queve_data.popularity}}</p>
+              {{library_queue_data.popularity}}</p>
           </li>
           <li class='lightbox__list__item'>
             <p class='item__list-title'>Original Title</p>
             <span class='item-info-orig'>
-            {{library_queve_data.original_title}}
+            {{library_queue_data.original_title}}
           </span>
           </li>
           <li class='lightbox__list__item'>
             <p class='item__list-title'>Genre</p>
             <span class='item-info-gen'>
-{{library_queve_data.genre_ids}}
+{{library_queue_data.genre_ids}}
           </span>
           </li>
         </ul>
         <h3 class='lightbox__about'>About</h3>
-        <p class='lightbox__text'>{{library_queve_data.overview}}
+        <p class='lightbox__text'>{{library_queue_data.overview}}
         </p>
         <div class='buttons-content'>
           <button
@@ -61,18 +61,18 @@
               type='button'
               data-action='btn-to-queue'
               value='Queue'
-              @click="deleteFromQueve"
-          >{{ buttonTitleQueve }}</button>
+              @click="deleteFromQueue"
+          >{{ buttonTitleQueue }}</button>
         </div>
       </div>
     </div>
   </Popup>
 
   <ul class="content__cards"
-      v-if="library_queve_data.length"
+      v-if="library_queue_data"
   >
   <li class='content__card content__card__show__info' @click="showPopupInfo">
-    <a href='#' :data-id='library_queve_data.id' class='content__link'>
+    <a href='#' :data-id='library_queue_data.id' class='content__link'>
       <div class='poster__wraper'>
         <img
             :src='source'
@@ -81,11 +81,11 @@
         />
       </div>
       <div class='card__description'>
-        <p class='content__title'>{{library_queve_data.title}}</p>
-        <p class='content__info'><span class='content__genres'>{{library_queve_data.genre_ids}}</span>
+        <p class='content__title'>{{library_queue_data.title}}</p>
+        <p class='content__info'><span class='content__genres'>{{library_queue_data.genre_ids}}</span>
           |
-          <span class='content__year'>{{library_queve_data.release_date}}</span>
-          <span class='content__rating'>{{library_queve_data.vote_average}}</span></p>
+          <span class='content__year'>{{library_queue_data.release_date}}</span>
+          <span class='content__rating'>{{library_queue_data.vote_average}}</span></p>
       </div>
     </a>
   </li>
@@ -97,13 +97,13 @@
 <script>
 import Popup from "../popup/Popup";
 export default {
-  name: "LibraryQueve",
+  name: "LibraryQueue",
   components: {
     Popup
   },
 
   props: {
-    library_queve_data: {
+    library_queue_data: {
       type: Object,
       default() {
         return {}
@@ -113,9 +113,9 @@ export default {
       type:String,
       default: 'Add to watched'
     },
-    buttonTitleQueve:{
+    buttonTitleQueue:{
       type:String,
-      default: 'Del from Queve'
+      default: 'Del from Queue'
     }
   },
   data() {
@@ -130,20 +130,20 @@ export default {
     closeInfoPopup() {
       this.isInfoPopupVisible = false;
     },
-    deleteFromQueve(){
-      this.$emit('deleteFromQueve',this.library_queve_data);
+    deleteFromQueue(){
+      this.$emit('deleteFromQueue',this.library_queue_data);
     },
     addToWatched(){
-      this.$emit('addToWatched',this.library_queve_data);
+      this.$emit('addToWatched',this.library_queue_data);
     }
   },
 
     computed:{
       posterAlt() {
-        return `poster for ${this.library_queve_data.title}`
+        return `poster for ${this.library_queue_data.title}`
       },
       source(){
-        return `https://image.tmdb.org/t/p/w300${this.library_queve_data.poster_path}`
+        return `https://image.tmdb.org/t/p/w300${this.library_queue_data.poster_path}`
       },
 },
   mounted() {
@@ -158,7 +158,7 @@ export default {
 </script>
 
 <style scoped>
-.libraryQueve{
+.libraryQueue{
   /*display:none;*/
 }
 

@@ -41,31 +41,30 @@
       <button type="button"
               class="modal-button js-queue"
               data-name="Queue"
-              @click="currentComponent='LibraryQueve'"
+              @click="currentComponent='LibraryQueue'"
       >
         Queue
       </button>
     </div>
   </div>
   <keep-alive>
-<component :is="currentComponent" ></component>
+<component :is="currentComponent" v-bind="currentComponent.props"></component>
       </keep-alive>
 <!--  <LibraryWatched-->
-<!--  @addToQueve="addToQueve"-->
+<!--  @addToQueue="addToQueue"-->
 <!--  v-for="(item, index) in library_watched_data"-->
 <!--  :key="item.id"-->
 <!--  :library_watched_data="item"-->
 <!--  @deleteFromWatched="deleteFromWatched(index)"-->
 <!--  ></LibraryWatched>-->
 
-
-<!--  <LibraryQueve-->
+<!--  <LibraryQueue-->
 <!--  @addToWatched="addToWatched"-->
-<!--  v-for="(item,index) in library_queve_data"-->
+<!--  v-for="(item,index) in library_queue_data"-->
 <!--  :key="item.id"-->
-<!--  :library_queve_data="item"-->
-<!--  @deleteFromQueve="deleteFromQueve(index)"-->
-<!--  ></LibraryQueve>-->
+<!--  :library_queue_data="item"-->
+<!--  @deleteFromQueue="deleteFromQueue(index)"-->
+<!--  ></LibraryQueue>-->
 
   <Footer/>
 </div>
@@ -76,14 +75,14 @@
 import {mapActions,mapGetters} from "vuex";
 // import LibraryHeader from "./LibraryHeader"
 import Footer from "./Footer"
-import LibraryQueve from "./LibraryQueve";
+import LibraryQueue from "./LibraryQueue";
 import LibraryWatched from "./LibraryWatched";
 export default {
   name: "Library",
   components: {
     // LibraryHeader,
     Footer,
-    LibraryQueve,
+    LibraryQueue,
     LibraryWatched
   },
   props:{
@@ -93,7 +92,7 @@ export default {
         return []
       }
     },
-    library_queve_data:{
+    library_queue_data:{
       type: Array,
       default(){
         return []
@@ -102,43 +101,37 @@ export default {
   },
   data(){
     return{
-      currentComponent:'LibraryWatched'
+      currentComponent:'LibraryWatched',
     }
   },
   computed: {
     ...mapGetters([
       'LIBRARY_WATCHED',
-      'LIBRARY_QUEVE'
+      'LIBRARY_QUEUE'
 
-    ])
+    ]),
+
   },
   methods:{
     ...mapActions([
       'DELETE_FROM_WATCHED',
-      'DELETE_FROM_QUEVE',
+      'DELETE_FROM_QUEUE',
       'ADD_TO_LIBRARY_WATCHED',
-      'ADD_TO_LIBRARY_QUEVE'
+      'ADD_TO_LIBRARY_QUEUE'
 
     ]),
-    swapComponent(){
-      if (this.currentComponent === LibraryWatched) {
-        this.currentComponent = LibraryQueve;
-      } else {
-        this.currentComponent = LibraryWatched;
-      }
-    },
     addToWatched(data) {
       this.ADD_TO_LIBRARY_WATCHED(data)
     },
-    addToQueve(data) {
-      this.ADD_TO_LIBRARY_QUEVE(data)
+    addToQueue(data) {
+      this.ADD_TO_LIBRARY_QUEUE(data)
     },
     deleteFromWatched(index){
       this.DELETE_FROM_WATCHED(index)
 
     },
-    deleteFromQueve(index){
-      this.DELETE_FROM_QUEVE(index)
+    deleteFromQueue(index){
+      this.DELETE_FROM_QUEUE(index)
     }
   }
 }
