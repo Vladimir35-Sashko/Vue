@@ -34,37 +34,41 @@
           type="button"
           data-name="Watched"
           class="modal-button header__button--right modal-button--active js-watched"
-      @click="currentComponent='LibraryWatched'"
+      @click="type ='watched'"
       >
         Watched
       </button>
       <button type="button"
               class="modal-button js-queue"
               data-name="Queue"
-              @click="currentComponent='LibraryQueue'"
+              @click="type='queue'"
       >
         Queue
       </button>
     </div>
   </div>
-  <keep-alive>
-<component :is="currentComponent" v-bind="currentComponent.props"></component>
-      </keep-alive>
-<!--  <LibraryWatched-->
-<!--  @addToQueue="addToQueue"-->
-<!--  v-for="(item, index) in library_watched_data"-->
-<!--  :key="item.id"-->
-<!--  :library_watched_data="item"-->
-<!--  @deleteFromWatched="deleteFromWatched(index)"-->
-<!--  ></LibraryWatched>-->
 
-<!--  <LibraryQueue-->
-<!--  @addToWatched="addToWatched"-->
-<!--  v-for="(item,index) in library_queue_data"-->
-<!--  :key="item.id"-->
-<!--  :library_queue_data="item"-->
-<!--  @deleteFromQueue="deleteFromQueue(index)"-->
-<!--  ></LibraryQueue>-->
+  <template v-if="type === 'watched'">
+    <LibraryWatched
+        @addToQueue="addToQueue"
+        v-for="(item, index) in LIBRARY_WATCHED"
+        :key="item.id"
+        :library_watched_data="item"
+        @deleteFromWatched="deleteFromWatched(index)"
+    ></LibraryWatched>
+  </template>
+
+  <template v-if="type === 'queue'">
+    <LibraryQueue
+        @addToWatched="addToWatched"
+        v-for="(item,index) in LIBRARY_QUEUE"
+        :key="item.id"
+        :library_queue_data="item"
+        @deleteFromQueue="deleteFromQueue(index)"
+    ></LibraryQueue>
+  </template>
+
+
 
   <Footer/>
 </div>
@@ -102,6 +106,7 @@ export default {
   data(){
     return{
       currentComponent:'LibraryWatched',
+      type: 'watched'
     }
   },
   computed: {
@@ -111,6 +116,9 @@ export default {
 
     ]),
 
+    items(){
+      return this.type === 'watched' ? this.LIBRARY_WATCHED : this.LIBRARY_QUEUE
+    }
   },
   methods:{
     ...mapActions([
