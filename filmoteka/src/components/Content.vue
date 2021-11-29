@@ -24,6 +24,7 @@ import Footer from "./Footer.vue"
 import GoToTop from "./GoToTop";
 import ContentItem from './ContentItem.vue'
 import {mapActions,mapGetters} from 'vuex'
+import genresIds from "../vuex/genresIds";
 export default {
   name:'Content',
   components:{
@@ -77,7 +78,25 @@ export default {
      axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738&page=${this.page}`)
           .then(response => {
             const newFilm=response.data.results;
-            this.$store.commit('ADD_FILMS_TO_STATE',...newFilm)
+            this.$store.commit('ADD_FILMS_TO_STATE',...newFilm);
+            const filmList = response.data.results;
+            filmList.map(item => {
+              let newGenres = [];
+              item.genre_ids.map(id => {
+                const found = genresIds.find(item => item.id === id);
+                newGenres.push(found.name);
+              });
+              if (newGenres.length >= 3) {
+                const normalizedGenres = newGenres.slice(0, 2);
+                normalizedGenres.push("Other");
+                item.genre_ids = normalizedGenres.join(", ");
+                item.release_date = item.release_date.slice(0, 4);
+              } else {
+                item.genre_ids = newGenres.join(", ");
+                if (item.release_date)
+                  item.release_date = item.release_date.slice(0, 4);
+              }
+            });
             if (this.bottomVisible()) {
               this.addFilm()
             }
@@ -96,7 +115,25 @@ export default {
         return axios
             .get('https://api.themoviedb.org/3/search/movie?api_key=699fe261bad37d16f5bc7fa8547e0738&query='+this.SEARCH_VALUE)
             .then((response)=>{
-                            this.$store.commit('SET_FILMS_TO_STATE', response.data)
+                            this.$store.commit('SET_FILMS_TO_STATE', response.data);
+              const filmList = response.data.results;
+              filmList.map(item => {
+                let newGenres = [];
+                item.genre_ids.map(id => {
+                  const found = genresIds.find(item => item.id === id);
+                  newGenres.push(found.name);
+                });
+                if (newGenres.length >= 3) {
+                  const normalizedGenres = newGenres.slice(0, 2);
+                  normalizedGenres.push("Other");
+                  item.genre_ids = normalizedGenres.join(", ");
+                  item.release_date = item.release_date.slice(0, 4);
+                } else {
+                  item.genre_ids = newGenres.join(", ");
+                  if (item.release_date)
+                    item.release_date = item.release_date.slice(0, 4);
+                }
+              });
             })
             .catch(error=> console.log(error));
       }

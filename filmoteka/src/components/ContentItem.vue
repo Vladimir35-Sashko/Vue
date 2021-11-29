@@ -84,7 +84,7 @@
       </div>
       <div class='card__description'>
         <p class='content__title'>{{filmData.title}}</p>
-        <p class='content__info'><span class='content__genres'>{{genreValue()}}</span>
+        <p class='content__info'><span class='content__genres'>{{filmData.genre_ids}}</span>
 
           <span class='content__year'>{{filmData.release_date}}</span>
           <span class='content__rating'>{{filmData.vote_average}}</span></p>
@@ -97,9 +97,10 @@
 </template>
 
 <script>
-// import genreList from "../vuex/genreList.json"
+// import genresIds from "../vuex/genresIds";
 import Popup from "../popup/Popup";
-import axios from "axios";
+// import axios from "axios";
+// import axios from "axios";
 
 export default {
     name:'ContentItem',
@@ -112,18 +113,15 @@ export default {
         default(){
           return {}
         }
-
     },
     buttonTitle:{
       type:String,
       default: 'add to watched'
     },
-
-
   },
     data() {
         return {
-          isInfoPopupVisible: false
+          isInfoPopupVisible: false,
         }
     },
   methods:{
@@ -140,19 +138,7 @@ export default {
     addToQueue(){
       this.$emit('addToQueue',this.filmData);
     },
-    genreValue(){
-      axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=699fe261bad37d16f5bc7fa8547e0738&language=en-US')
-      .then(response=>{
-        const genres = {};
-        response.data.genres.forEach(({id,name})=>{
-          genres[id] = name;
-          // console.log(genres)
-          return genres;
-        })
-      }).catch((error)=>{
-        console.log(error)
-      })
-    }
+
   },
   computed:{
       posterAlt() {

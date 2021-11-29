@@ -66,8 +66,8 @@
         </div>
       </div>
     </Popup>
-
-    <ul class="content__cards" v-if="library_watched_data">
+    <template v-if="LIBRARY_WATCHED.length">
+    <ul class="content__cards">
       <li
         class="content__card content__card__show__info"
         @click="showPopupInfo"
@@ -87,7 +87,9 @@
         </a>
       </li>
     </ul>
-    <h2 class="empty-list" v-else>Watched list is empty...</h2>
+    </template>
+      <h2 v-else class="empty-list">Watched list is empty...</h2>
+
   </div>
 </template>
 
