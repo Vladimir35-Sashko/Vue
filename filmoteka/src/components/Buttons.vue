@@ -8,7 +8,7 @@
 
 <script>
 import axios from "axios";
-import genresIds from "../vuex/genresIds";
+import genres from "../vuex/genresValue";
 
 export default {
   name: "Buttons",
@@ -22,23 +22,7 @@ export default {
           .then((response)=>{
             this.$store.commit('SET_FILMS_TO_STATE', response.data);
                 const filmList = response.data.results;
-                filmList.map(item => {
-                  let newGenres = [];
-                  item.genre_ids.map(id => {
-                    const found = genresIds.find(item => item.id === id);
-                    newGenres.push(found.name);
-                  });
-                  if (newGenres.length >= 3) {
-                    const normalizedGenres = newGenres.slice(0, 2);
-                    normalizedGenres.push("Other");
-                    item.genre_ids = normalizedGenres.join(", ");
-                    item.release_date = item.release_date.slice(0, 4);
-                  } else {
-                    item.genre_ids = newGenres.join(", ");
-                    if (item.release_date)
-                      item.release_date = item.release_date.slice(0, 4);
-                  }
-                });
+                genres(filmList);
           })
           .catch(error=> console.log(error));
     },
@@ -48,23 +32,7 @@ export default {
           .then((response)=>{
             this.$store.commit('SET_FILMS_TO_STATE', response.data);
             const filmList = response.data.results;
-            filmList.map(item => {
-              let newGenres = [];
-              item.genre_ids.map(id => {
-                const found = genresIds.find(item => item.id === id);
-                newGenres.push(found.name);
-              });
-              if (newGenres.length >= 3) {
-                const normalizedGenres = newGenres.slice(0, 2);
-                normalizedGenres.push("Other");
-                item.genre_ids = normalizedGenres.join(", ");
-                item.release_date = item.release_date.slice(0, 4);
-              } else {
-                item.genre_ids = newGenres.join(", ");
-                if (item.release_date)
-                  item.release_date = item.release_date.slice(0, 4);
-              }
-            });
+            genres(filmList);
           })
           .catch(error=> console.log(error));
     }
