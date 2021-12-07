@@ -115,7 +115,7 @@ export default {
         return axios
             .get('https://api.themoviedb.org/3/search/movie?api_key=699fe261bad37d16f5bc7fa8547e0738&query='+this.SEARCH_VALUE)
             .then((response)=>{
-                            this.$store.commit('SET_FILMS_TO_STATE', response.data);
+              this.$store.commit('SET_FILMS_TO_STATE', response.data);
               const filmList = response.data.results;
               filmList.map(item => {
                 let newGenres = [];
@@ -140,7 +140,7 @@ export default {
       else if(value===''){
         this.GET_FILMS_FROM_API()
       }
-          },
+    },
     addToWatched(data){
       this.ADD_TO_LIBRARY_WATCHED(data)
     },

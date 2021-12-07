@@ -19,8 +19,8 @@ export default {
             newGenres.push(found.name);
           });
           if (newGenres.length >= 3) {
-            const normalizedGenres = newGenres.slice(0, 2);
-            normalizedGenres.push("Other");
+            const normalizedGenres = newGenres.slice(0, 3);
+            normalizedGenres.push("Other ");
             item.genre_ids = normalizedGenres.join(", ");
             item.release_date = item.release_date.slice(0, 4);
           } else {
