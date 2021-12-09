@@ -1,10 +1,11 @@
 import axios from "axios";
 import genres from "../genresValue";
+// import { fetchTrendingMovies } from "../services/apiService";
 
 export default {
   GET_FILMS_FROM_API({ commit }) {
     return axios(
-      "https://api.themoviedb.org/3/trending/movie/day?api_key=699fe261bad37d16f5bc7fa8547e0738",
+      "https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738",
       {
         method: "GET"
       }

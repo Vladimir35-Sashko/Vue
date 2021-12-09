@@ -7,8 +7,11 @@
 </template>
 
 <script>
-import axios from "axios";
+
 import genres from "../vuex/genresValue";
+import ApiService from "../vuex/services/apiService";
+const apiService = new ApiService();
+
 
 export default {
   name: "Buttons",
@@ -16,25 +19,17 @@ export default {
     return {}
   },
   methods:{
-    allTimePopularFilms(){
-      return axios
-          .get('https://api.themoviedb.org/3/movie/popular?api_key=699fe261bad37d16f5bc7fa8547e0738')
-          .then((response)=>{
-            this.$store.commit('SET_FILMS_TO_STATE', response.data);
-                const filmList = response.data.results;
-                genres(filmList);
-          })
-          .catch(error=> console.log(error));
+    async allTimePopularFilms(){
+     const popularData = await apiService.fetchPopularMovies();
+      this.$store.commit('SET_FILMS_TO_STATE', popularData);
+      const filmList = popularData.results;
+      genres(filmList);
     },
-    thisWeekFilms(){
-      return axios
-          .get('https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738')
-          .then((response)=>{
-            this.$store.commit('SET_FILMS_TO_STATE', response.data);
-            const filmList = response.data.results;
-            genres(filmList);
-          })
-          .catch(error=> console.log(error));
+    async thisWeekFilms(){
+      const weekData = await apiService.fetchThisWeekPopularMovies();
+      this.$store.commit('SET_FILMS_TO_STATE', weekData);
+      const filmList = weekData.results;
+      genres(filmList);
     }
   }
 }

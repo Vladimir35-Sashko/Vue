@@ -4,7 +4,7 @@
     <div class=" container header__container home-container">
     <Header/>
     </div>
-    <Buttons @click="allTimePopularFilms();thisWeekFilms()" ></Buttons>
+    <Buttons ></Buttons>
     <div class="content__cards">
           <ContentItem  v-for="film in FILMS" :key="film.id" :filmData="film" @addToWatched="addToWatched"
                         @addToQueue="addToQueue"
@@ -18,13 +18,15 @@
 <script>
 
 import genres from "../vuex/genresValue"
-import axios from "axios";
 import Buttons from "./Buttons"
 import Header from "./Header.vue"
 import Footer from "./Footer.vue"
 import GoToTop from "./GoToTop";
 import ContentItem from './ContentItem.vue'
-import {mapActions,mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
+import ApiService from "../vuex/services/apiService";
+const apiService = new ApiService();
+
 
 
 export default {
@@ -71,19 +73,17 @@ export default {
       const bottomOfPage = visible + scrollY >= pageHeight
       return bottomOfPage || pageHeight < visible
     },
-    addFilm () {
-     axios.get(`https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738&page=${this.page}`)
-          .then(response => {
-            const newFilm = response.data.results;
-            this.$store.commit('ADD_FILMS_TO_STATE',...newFilm);
-            const filmList = response.data.results;
-            genres(filmList);
-            if (this.bottomVisible()) {
-              this.addFilm()
-            }
-          })
-     this.page++;
-  },
+
+    async addFilm () {
+      const addFilmData = await apiService.fetchThisWeekPopularMovies(this.page);
+      const newFilm = addFilmData.results;
+      genres(newFilm);
+      this.$store.commit('ADD_FILMS_TO_STATE', ...newFilm);
+      this.page++;
+      if (this.bottomVisible()) {
+             await this.addFilm();
+      }
+    },
 
     ...mapActions([
         'GET_FILMS_FROM_API',
@@ -91,19 +91,15 @@ export default {
         'ADD_TO_LIBRARY_QUEUE',
 
     ]),
-    "searchFilmsByValue"(value){
-      if (value){
-        return axios
-            .get('https://api.themoviedb.org/3/search/movie?api_key=699fe261bad37d16f5bc7fa8547e0738&query='+this.SEARCH_VALUE)
-            .then((response)=>{
-              this.$store.commit('SET_FILMS_TO_STATE', response.data);
-              const filmList = response.data.results;
-              genres(filmList);
-            })
-            .catch(error=> console.log(error));
+    async searchFilmsByValue(value){
+      if (value) {
+        const searchData = await apiService.fetchMoviesSearchQuery(value);
+        this.$store.commit('SET_FILMS_TO_STATE', searchData);
+        const filmList = searchData.results;
+        genres(filmList);
       }
       else if(value===''){
-        this.GET_FILMS_FROM_API()
+        await this.GET_FILMS_FROM_API()
       }
     },
     addToWatched(data){
@@ -112,23 +108,6 @@ export default {
     addToQueue(data){
       this.ADD_TO_LIBRARY_QUEUE(data)
     },
-    allTimePopularFilms(){
-      return axios
-          .get('https://api.themoviedb.org/3/movie/popular?api_key=699fe261bad37d16f5bc7fa8547e0738')
-          .then((response)=>{
-            this.$store.commit('SET_FILMS_TO_STATE', response.data)
-          })
-          .catch(error=> console.log(error));
-    },
-    thisWeekFilms(){
-      return axios
-          .get('https://api.themoviedb.org/3/trending/movie/week?api_key=699fe261bad37d16f5bc7fa8547e0738')
-          .then((response)=>{
-            this.$store.commit('SET_FILMS_TO_STATE', response.data)
-          })
-          .catch(error=> console.log(error));
-    }
-
   },
 
   created () {
@@ -144,10 +123,8 @@ export default {
       if (response.data) {
         this.searchFilmsByValue(this.SEARCH_VALUE)
         this.addFilm()
-      }
-    })
+      }})
   }
-
 }
 </script>
 <style scoped>
