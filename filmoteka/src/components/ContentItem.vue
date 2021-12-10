@@ -97,10 +97,9 @@
 </template>
 
 <script>
-// import genresIds from "../vuex/genresIds";
+
 import Popup from "../popup/Popup";
-// import axios from "axios";
-// import axios from "axios";
+
 
 export default {
     name:'ContentItem',

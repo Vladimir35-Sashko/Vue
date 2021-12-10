@@ -122,7 +122,7 @@ export default {
     .then((response)=>{
       if (response.data) {
         this.searchFilmsByValue(this.SEARCH_VALUE)
-        this.addFilm()
+        // this.addFilm()
       }})
   }
 }
